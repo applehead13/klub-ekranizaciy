@@ -3249,3 +3249,4 @@ html.modal-open body::after { display: none; }
   .sec-head.side > p { width: calc(100% / 3 - 20px) !important; }
   .sec-head h2 { font-size: clamp(56px, min(7vw, calc((50vw - 70px) / 7.5)), 128px); }
 }
+@media (min-width: 1061px) { .f-bot p:nth-child(1) { max-width: 100% !important; } }

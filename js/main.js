@@ -1154,5 +1154,6 @@
   }
   place(); window.addEventListener('resize', place); window.addEventListener('load', place);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
-  setTimeout(place, 800);
+  setTimeout(place, 800); setTimeout(place, 2000);
+  if (window.ResizeObserver) { var ro = new ResizeObserver(function () { requestAnimationFrame(place); }); ro.observe(q); ro.observe(document.querySelector('.f-main') || bot); }   // цитата сдвигается, когда меняется катушка или шрифты: пересчитываем
 })();
