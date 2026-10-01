@@ -3281,3 +3281,14 @@ html.modal-open body::after { display: none; }
 
 /* Плавающее меню на сенсорных экранах (iPhone): пункты там не ниже 44 px, поэтому высота пункта в расчётах тоже 44 — иначе список сдвигается на 4 px за каждый пункт и слово уезжает вниз */
 @media (hover: none) { .dock { --ih: 44px; } .dock-item { height: var(--ih); min-height: var(--ih); } }
+
+/* Телефон: заголовок блока и текст под ним — без text-box (Safari считает обрезку полей по-своему, и текст наезжал на заголовок). Расстояния заданы обычными полями по метрикам шрифтов, в любом браузере одинаково */
+@media (max-width: 520px) {
+  .sec .sec-head h2 { text-box: none !important; margin-top: var(--h2-mt, 0px); }
+  .sec .sec-head > p { text-box: none !important; }
+  .sec-head { row-gap: var(--hp-gap, 0px) !important; }
+}
+@media (max-width: 520px) {
+  .sec .sec-head h2 { margin-top: -0.232em; }
+  .sec .sec-head > p { margin-top: -1px; }
+}
