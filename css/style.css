@@ -3278,3 +3278,6 @@ html.modal-open body::after { display: none; }
 .dock-cta { padding-top: var(--cta-pt, 0px) !important; padding-bottom: var(--cta-pb, 0px) !important; }
 .dock-cta { --cta-pb: 2px; }
 .dock-t { --dock-shift: -1px; }
+
+/* Плавающее меню на сенсорных экранах (iPhone): пункты там не ниже 44 px, поэтому высота пункта в расчётах тоже 44 — иначе список сдвигается на 4 px за каждый пункт и слово уезжает вниз */
+@media (hover: none) { .dock { --ih: 44px; } .dock-item { height: var(--ih); min-height: var(--ih); } }
