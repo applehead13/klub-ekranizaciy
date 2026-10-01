@@ -3207,3 +3207,20 @@ html.modal-open body::after { display: none; }
 @media (min-width: 1061px) { .f-bot { flex-wrap: nowrap; } .f-bot p:last-child { text-align: right; margin-left: auto; flex: none; } }
 @media (max-width: 1060px) { .f-bot { flex-direction: column; align-items: center; gap: 10px; text-align: center; } .f-bot p { max-width: none; } }
 @media (min-width: 1061px) { .f-bot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 20px; } .f-bot p, .f-bot p:last-child { max-width: none; text-align: left; margin: 0; } .f-bot p:last-child { white-space: nowrap; text-align: right; } }
+
+/* подвал, ПК (от 1061 px): три компактные колонки — слева «о концепте» (две ровные строки), по центру «шрифты» (две ровные строки), справа «Дизайн — Полина Гусева» и ниже Telegram */
+.f-br2 { display: none; }
+@media (min-width: 1061px) {
+  .f-bot { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important; align-items: start; }
+  .f-bot p { text-wrap: balance; max-width: 34ch !important; }
+  .f-bot p:nth-child(1) { justify-self: start; text-align: left; }
+  .f-bot p:nth-child(2) { justify-self: center; text-align: center; }
+  .f-bot p:last-child { justify-self: end; text-align: right !important; white-space: normal !important; max-width: none !important; }
+  .f-br2 { display: inline; }
+  .f-dot { display: none; }
+}
+@media (min-width: 1061px) {
+  .f-bot { grid-template-columns: auto auto auto !important; justify-content: space-between; column-gap: 20px; }
+  .f-bot p:nth-child(1) { max-width: 52ch !important; }
+  .f-bot p:nth-child(2) { max-width: 46ch !important; }
+}
