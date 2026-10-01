@@ -3261,3 +3261,9 @@ html.modal-open body::after { display: none; }
   @keyframes fog { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
   .hero .nav > .logo, .hero .nav .links a, .hero .nav .tg, .hero .lead, .hero .subs, .hero .score, .hero .hero-ctas, .in { will-change: transform, opacity; }
 }
+
+/* Плавающее меню в Safari: ширина плашки считается по самому длинному слову, слова не переносятся и не выходят за плашку */
+.dock-view { width: max-content; }
+.dock-list { width: max-content; min-width: 100%; }
+.dock-item { white-space: nowrap; width: 100%; box-sizing: border-box; min-width: max-content; }
+.dock-t { white-space: nowrap; flex: none; }
