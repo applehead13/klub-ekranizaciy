@@ -3267,3 +3267,14 @@ html.modal-open body::after { display: none; }
 .dock-list { width: max-content; min-width: 100%; }
 .dock-item { white-space: nowrap; width: 100%; box-sizing: border-box; min-width: max-content; }
 .dock-t { white-space: nowrap; flex: none; }
+
+/* Телефон (до 520 px): между заголовком блока и текстом под ним — ровно 10 px по видимым буквам (замер на 430×932, iPhone 14 Pro Max, давал 14) */
+@media (max-width: 520px) { .sec-head { row-gap: 6px; } }
+
+/* Плавающее меню: центровка слов без text-box (Safari считает обрезку полей шрифта иначе, и слова оказывались прижаты к низу). Слово стоит в строке высотой 1 и центрируется flex-ом; поправка по метрикам шрифта — одинаково во всех браузерах */
+.dock-t, .dock-cta { text-box: none !important; line-height: 1 !important; }
+.dock-item { align-items: center; padding-block: 0; }
+.dock-t { position: relative; top: var(--dock-shift, 0px); }
+.dock-cta { padding-top: var(--cta-pt, 0px) !important; padding-bottom: var(--cta-pb, 0px) !important; }
+.dock-cta { --cta-pb: 2px; }
+.dock-t { --dock-shift: -1px; }
