@@ -1141,3 +1141,18 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
   setTimeout(measure, 800);
 })();
+
+/* Подвал, ПК: строка «Шрифты» начинается там же, где цитата: ширина первой колонки = от левого края строки до начала цитаты */
+(function () {
+  var q = document.querySelector('.f-bye-txt'), bot = document.querySelector('.f-bot');
+  if (!q || !bot) return;
+  function place() {
+    bot.style.removeProperty('--q-col');
+    if (window.innerWidth < 1061) return;
+    var col = q.getBoundingClientRect().left - bot.getBoundingClientRect().left - (parseFloat(getComputedStyle(bot).columnGap) || 0);
+    if (col > 120) bot.style.setProperty('--q-col', Math.round(col) + 'px');
+  }
+  place(); window.addEventListener('resize', place); window.addEventListener('load', place);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+  setTimeout(place, 800);
+})();

@@ -3224,3 +3224,22 @@ html.modal-open body::after { display: none; }
   .f-bot p:nth-child(1) { max-width: 52ch !important; }
   .f-bot p:nth-child(2) { max-width: 46ch !important; }
 }
+
+/* От 1920 px: текст сбоку от заголовка начинается там, где начинается вторая колонка карточек «Формата» (треть блока + зазор) и идёт до правого края — у всех блоков */
+@media (min-width: 1920px) {
+  .sec-head.side > p { width: calc((200% - var(--out)) / 3 + 7px) !important; }
+}
+@media (min-width: 1920px) {
+  .sec-head.side > p { flex: none !important; }
+  .sec-head h2 { font-size: clamp(56px, min(7vw, calc((34vw - 60px) / 5.9)), 128px); }
+}
+/* подвал, ПК: «Шрифты» начинаются там же, где цитата (одинаковый старт) */
+@media (min-width: 1061px) {
+  .f-bot p:nth-child(2) { justify-self: start !important; text-align: left !important; margin-left: var(--q-shift, 0px) !important; }
+}
+
+@media (min-width: 1061px) {
+  .f-bot { grid-template-columns: var(--q-col, 1fr) minmax(0, 1fr) auto !important; justify-content: normal !important; }
+  .f-bot p:nth-child(1) { max-width: min(52ch, 100%) !important; }
+  .f-bot p:nth-child(2) { margin-left: 0 !important; justify-self: start !important; max-width: 46ch !important; }
+}
