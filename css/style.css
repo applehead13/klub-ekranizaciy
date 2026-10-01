@@ -3341,3 +3341,8 @@ html.modal-open body::after { display: none; }
   .signup .ticket { filter: none !important; box-shadow: 0 16px 28px rgba(0, 0, 0, .4); touch-action: pan-y; }
   .signup .tk-main, .signup .tk-stub { touch-action: pan-y; }
 }
+
+/* «Билет воображаемый» (после брони): на телефоне и планшете без прокрутки — отлетевшая отрывная часть раньше растягивала область прокрутки */
+@media (max-width: 900px), (hover: none) {
+  .signup .ticket.tearing, .signup .ticket.torn { overflow: visible !important; max-height: none; }
+}

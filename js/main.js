@@ -1170,7 +1170,7 @@
     host.appendChild(ind);
     function upd() {
       var sh = box.scrollHeight, ch = box.clientHeight;
-      if (!ch || sh <= ch + 2 || !box.offsetParent) { ind.classList.remove('on'); return; }
+      if (!ch || sh <= ch + 2 || !box.offsetParent || getComputedStyle(box).overflowY === 'visible') { ind.classList.remove('on'); return; }
       var r = box.getBoundingClientRect(), h = host.getBoundingClientRect(), track = ch - 40, th = Math.max(28, track * ch / sh);
       ind.style.top = (r.top - h.top + 20 + (track - th) * box.scrollTop / (sh - ch)) + 'px';
       ind.style.right = (h.right - r.right + 4) + 'px';
