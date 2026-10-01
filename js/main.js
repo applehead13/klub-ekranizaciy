@@ -32,6 +32,10 @@
   function expand() {
     var hero = document.querySelector('.hero'), heroImg = document.querySelector('.hero-media img');
     if (!hero) { finish(); return; }
+    if (window.innerWidth <= 900 || (window.matchMedia && matchMedia('(hover: none)').matches)) {   // телефон и планшет: окошко не растягивается на экран (это шло рывками), а прелоадер плавно растворяется, открывая то же фото
+      pl.classList.add('expand'); pl.style.transition = 'opacity .8s ease, background-color .4s ease'; void pl.offsetWidth; pl.style.opacity = '0';
+      setTimeout(finish, 850); return;
+    }
     var b = box.getBoundingClientRect(), t = hero.getBoundingClientRect();
     box.style.transition = 'none';             // фиксируем окошко ровно там, где оно стоит, без перелёта к центру
     box.classList.add('fly');

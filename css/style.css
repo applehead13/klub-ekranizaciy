@@ -3250,3 +3250,14 @@ html.modal-open body::after { display: none; }
   .sec-head h2 { font-size: clamp(56px, min(7vw, calc((50vw - 70px) / 7.5)), 128px); }
 }
 @media (min-width: 1061px) { .f-bot p:nth-child(1) { max-width: 100% !important; } }
+
+/* Телефон и планшет: приближение и затемнение фото на первом экране убрано — на сенсорных экранах оно шло рывками (анимация filter на большой картинке) */
+@media (max-width: 900px), (hover: none) {
+  .hero-media img, html.has-pl .hero-media img { animation: none !important; filter: none !important; transform: none !important; will-change: auto; }
+}
+
+/* Телефон и планшет: появление «из тумана» осталось, но без размытия (blur на сенсорных экранах рвёт анимацию) — мягкий подъём и проявление, только transform и opacity */
+@media (max-width: 900px), (hover: none) {
+  @keyframes fog { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+  .hero .nav > .logo, .hero .nav .links a, .hero .nav .tg, .hero .lead, .hero .subs, .hero .score, .hero .hero-ctas, .in { will-change: transform, opacity; }
+}
