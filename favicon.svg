@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+        <defs>
+          <linearGradient id="reel-metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f2ee"/><stop offset=".5" stop-color="#b9b8b4"/><stop offset="1" stop-color="#8b8a86"/></linearGradient>
+          <radialGradient id="reel-film" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2a2a2a"/><stop offset="1" stop-color="#0d0d0d"/></radialGradient>
+        </defs>
+        <g>
+          <circle cx="100" cy="100" r="96" fill="url(#reel-metal)"/>
+          <circle cx="100" cy="100" r="88" fill="none" stroke="#7d7c78" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="84" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1"/>
+          <g fill="url(#reel-film)" stroke="#e9e8e4" stroke-width="3">
+            <circle cx="100" cy="50" r="22"/><circle cx="143.3" cy="75" r="22"/><circle cx="143.3" cy="125" r="22"/>
+            <circle cx="100" cy="150" r="22"/><circle cx="56.7" cy="125" r="22"/><circle cx="56.7" cy="75" r="22"/>
+          </g>
+          <circle cx="100" cy="100" r="22" fill="url(#reel-metal)" stroke="#7d7c78" stroke-width="1.5"/>
+          <g fill="#6f6e6a"><circle cx="100" cy="86" r="3"/><circle cx="112" cy="93" r="3"/><circle cx="112" cy="107" r="3"/><circle cx="100" cy="114" r="3"/><circle cx="88" cy="107" r="3"/><circle cx="88" cy="93" r="3"/></g>
+          <circle cx="100" cy="100" r="8" fill="#fff" stroke="#8b8a86" stroke-width="2"/>
+          <g stroke="#7d7c78" stroke-width="2.4" stroke-linecap="round"><path d="M40 28 L54 36"/><path d="M160 28 L146 36"/><path d="M40 172 L54 164"/><path d="M160 172 L146 164"/></g>
+        </g>
+      </svg>
