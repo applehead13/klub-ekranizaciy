@@ -3200,3 +3200,10 @@ html.modal-open body::after { display: none; }
   .nav-toggle.show { transition: color .45s !important; }
 }
 @media (max-width: 360px) { .su-head h2.su-lead, .su-lead { text-align: center; } }
+
+/* подвал, нижняя часть: три строки — слева две (о концепте и о шрифтах), справа авторство; на телефоне и планшете по центру */
+.f-bot { align-items: flex-start; }
+.f-bot p { max-width: 640px; }
+@media (min-width: 1061px) { .f-bot { flex-wrap: nowrap; } .f-bot p:last-child { text-align: right; margin-left: auto; flex: none; } }
+@media (max-width: 1060px) { .f-bot { flex-direction: column; align-items: center; gap: 10px; text-align: center; } .f-bot p { max-width: none; } }
+@media (min-width: 1061px) { .f-bot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 20px; } .f-bot p, .f-bot p:last-child { max-width: none; text-align: left; margin: 0; } .f-bot p:last-child { white-space: nowrap; text-align: right; } }
