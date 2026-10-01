@@ -1161,3 +1161,28 @@
   setTimeout(place, 800); setTimeout(place, 2000);
   if (window.ResizeObserver) { var ro = new ResizeObserver(function () { requestAnimationFrame(place); }); ro.observe(q); ro.observe(document.querySelector('.f-main') || bot); }   // цитата сдвигается, когда меняется катушка или шрифты: пересчитываем
 })();
+
+/* Полоса прокрутки внутри карточки героя и билета записи (всегда видна, если есть что прокручивать) */
+(function () {
+  function attach(box) {
+    if (!box) return;
+    var host = box.parentNode, ind = document.createElement('div'); ind.className = 'scroll-ind'; ind.setAttribute('aria-hidden', 'true');
+    host.appendChild(ind);
+    function upd() {
+      var sh = box.scrollHeight, ch = box.clientHeight;
+      if (!ch || sh <= ch + 2 || !box.offsetParent) { ind.classList.remove('on'); return; }
+      var r = box.getBoundingClientRect(), h = host.getBoundingClientRect(), track = ch - 40, th = Math.max(28, track * ch / sh);
+      ind.style.top = (r.top - h.top + 20 + (track - th) * box.scrollTop / (sh - ch)) + 'px';
+      ind.style.right = (h.right - r.right + 4) + 'px';
+      ind.style.height = th + 'px';
+      ind.classList.add('on');
+    }
+    box.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', upd);
+    new MutationObserver(function () { setTimeout(upd, 60); setTimeout(upd, 700); setTimeout(upd, 1600); }).observe(host.closest('dialog') || host, { attributes: true, attributeFilter: ['open', 'class'], subtree: false });
+    if (window.ResizeObserver) { var ro = new ResizeObserver(upd); ro.observe(box); }
+    var mo = new MutationObserver(function () { setTimeout(upd, 30); }); mo.observe(box, { childList: true, subtree: true, characterData: true });
+  }
+  attach(document.querySelector('.hv-card'));
+  attach(document.querySelector('.signup .ticket'));
+})();

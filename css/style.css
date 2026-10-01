@@ -3325,3 +3325,19 @@ html.modal-open body::after { display: none; }
   #now .bento > .c-where { margin-top: 10px; }   /* 10 (зазор сетки) + 10 = 20 */
 }
 @media (max-width: 400px) { #now .c-sess .x, #now .c-sess .w { white-space: normal; text-wrap: balance; } }   /* при полях 20 «сравниваем и голосуем» не помещается в строку: переносим «и голосуем» целиком */
+
+/* Плавающее меню: все элементы одной высоты 48, как кнопки сайта (на сенсорных экранах пункты 40 внутри плашки 48) */
+@media (hover: none) { .dock { --ih: 40px; } .dock-item { height: 40px; min-height: 40px; } }
+@media (max-width: 900px), (hover: none) { .page { margin-bottom: 78px; } }
+.dock-view, .dock-up, .dock-cta { box-sizing: border-box; }
+.dock:not(:hover) .dock-view { height: 48px; }
+
+/* Полоса прокрутки, нарисованная скриптом: на iPhone штатная полоса не показывается, а эта всегда на виду (узкая, 3 px) */
+.scroll-ind { position: absolute; right: 4px; width: 3px; border-radius: 2px; background: rgba(0, 0, 0, .3); pointer-events: none; opacity: 0; transition: opacity .2s; z-index: 7; }
+.scroll-ind.on { opacity: 1; }
+
+/* Окно записи на телефоне: у билета нет filter (в Safari filter на прокручиваемом блоке ломает прокрутку), тень обычная; пальцем можно тянуть вверх-вниз */
+@media (max-width: 900px), (hover: none) {
+  .signup .ticket { filter: none !important; box-shadow: 0 16px 28px rgba(0, 0, 0, .4); touch-action: pan-y; }
+  .signup .tk-main, .signup .tk-stub { touch-action: pan-y; }
+}
