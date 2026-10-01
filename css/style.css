@@ -3318,3 +3318,10 @@ html.modal-open body::after { display: none; }
 
 /* Телефон и планшет: после последнего блока пустое место на высоту плавающего меню (52) + отступ меню от низа (10) + 20, чтобы меню не закрывало подвал */
 @media (max-width: 900px), (hover: none) { .page { margin-bottom: 82px; } }
+
+/* Телефон: в карточках «книга / фильм / спор» от информации до края карточки 20; от последней карточки до блока с адресом 20 */
+@media (max-width: 520px) {
+  #now .bento > .c-sess { padding: 20px; }
+  #now .bento > .c-where { margin-top: 10px; }   /* 10 (зазор сетки) + 10 = 20 */
+}
+@media (max-width: 400px) { #now .c-sess .x, #now .c-sess .w { white-space: normal; text-wrap: balance; } }   /* при полях 20 «сравниваем и голосуем» не помещается в строку: переносим «и голосуем» целиком */
