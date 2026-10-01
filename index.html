@@ -12,7 +12,7 @@
   <meta name="description" content="Книжный клуб экранизаций в Санкт-Петербурге: читаем книгу, смотрим фильм и спорим, что получилось лучше.">
   <link rel="preload" href="fonts/Anvyl.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/TenorSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=545">
+  <link rel="stylesheet" href="css/style.css?v=546">
 </head>
 <body>
 <div class="pl" id="pl" aria-hidden="true">
@@ -253,8 +253,8 @@
   </footer>
 </div>
 
-<dialog class="signup" id="signup" aria-labelledby="su-title">
-  <div class="ticket" role="document">
+<dialog class="signup" id="signup" data-lenis-prevent aria-labelledby="su-title">
+  <div class="ticket" role="document" data-lenis-prevent>
     <button class="su-close" type="button" aria-label="Закрыть окно записи" data-su-close><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></button>
     <form class="su-form" novalidate>
       <div class="tk-main">
@@ -301,12 +301,12 @@
     <svg class="ink-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="ink" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/></filter></svg>
   </div>
 </dialog>
-<dialog class="hero-view" id="hero-view" aria-labelledby="hv-name">
+<dialog class="hero-view" id="hero-view" data-lenis-prevent aria-labelledby="hv-name">
   <div class="hv-stage">
     <div class="hv-flip"><img class="hv-img" alt="" width="500" height="1000"><img class="hv-color" alt="" width="566" height="1000"></div>
     <blockquote class="hv-quote"><p class="hv-say"></p><cite class="hv-src"></cite></blockquote>
   </div>
-  <article class="hv-card">
+  <article class="hv-card" data-lenis-prevent>
     <button class="hv-close" type="button" aria-label="Закрыть" data-hv-close><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></button>
     <div class="hv-top"><div class="hv-left"><header class="hv-head">
       <p class="hv-eyebrow"></p>
@@ -329,7 +329,7 @@
 <script src="js/vendor/lenis.min.js" defer></script>
 <script src="js/smooth.js?v=2" defer></script>
 <script src="js/season.js?v=22" defer></script>
-<script src="js/main.js?v=545" defer></script>
+<script src="js/main.js?v=546" defer></script>
 <script src="js/nav.js?v=14" defer></script>
 </body>
 </html>
