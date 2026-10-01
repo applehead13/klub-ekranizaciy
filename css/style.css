@@ -3292,3 +3292,29 @@ html.modal-open body::after { display: none; }
   .sec .sec-head h2 { margin-top: -0.232em; }
   .sec .sec-head > p { margin-top: -1px; }
 }
+
+/* Карточка героя на телефонах и планшетах: если описание не помещается — прокрутка внутри карточки; окно по видимой высоте экрана (в Safari нижняя панель закрывала конец текста), узкая полоса прокрутки всегда на виду */
+@media (max-width: 1180px) {
+  .hero-view { height: 100dvh; max-height: 100dvh; }
+  .hero-view[open] { box-sizing: border-box; }
+  .hv-card { max-height: 100%; overflow-y: auto !important; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, .35) transparent; }
+  .hv-card::-webkit-scrollbar { width: 4px; }
+  .hv-card::-webkit-scrollbar-track { background: transparent; margin-block: 20px; }
+  .hv-card::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, .35); border-radius: 2px; }
+}
+
+/* Окно записи на телефоне и планшете: билет не «прилетает ветром» (в Safari он перестраивался в центр и обрезался), а спокойно проявляется на месте; если не помещается в экран — прокрутка внутри билета (узкая полоса) */
+@media (max-width: 900px), (hover: none) {
+  @keyframes wind-in { from { opacity: 0; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+  @keyframes wind-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translate3d(0, 16px, 0); } }
+  .signup { height: 100dvh; max-height: 100dvh; perspective: none; }
+  .signup.open .ticket { animation-duration: .45s; transform-origin: 50% 50%; }
+  .signup.leaving .ticket { animation-duration: .3s; }
+  .signup .ticket { max-height: calc(100dvh - 40px); width: min(460px, 100%); overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, .35) transparent; }
+  .signup .ticket::-webkit-scrollbar { width: 4px; }
+  .signup .ticket::-webkit-scrollbar-track { background: transparent; margin-block: 20px; }
+  .signup .ticket::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, .35); border-radius: 2px; }
+}
+
+/* Телефон и планшет: после последнего блока пустое место на высоту плавающего меню (52) + отступ меню от низа (10) + 20, чтобы меню не закрывало подвал */
+@media (max-width: 900px), (hover: none) { .page { margin-bottom: 82px; } }
