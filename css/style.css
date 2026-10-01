@@ -3243,3 +3243,9 @@ html.modal-open body::after { display: none; }
   .f-bot p:nth-child(1) { max-width: min(52ch, 100%) !important; }
   .f-bot p:nth-child(2) { margin-left: 0 !important; justify-self: start !important; max-width: 46ch !important; }
 }
+
+/* От 1920 px (правка): текст сбоку от заголовка — в правой трети блока, от левого края третьей карточки «Формата» (там, где красная линия) */
+@media (min-width: 1920px) {
+  .sec-head.side > p { width: calc(100% / 3 - 20px) !important; }
+  .sec-head h2 { font-size: clamp(56px, min(7vw, calc((50vw - 70px) / 7.5)), 128px); }
+}
