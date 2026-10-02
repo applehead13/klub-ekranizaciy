@@ -189,7 +189,7 @@
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !('IntersectionObserver' in window)) return;
 
-  var targets = document.querySelectorAll('.sec-head, .bento > *, .fr, .fact, .row, .garland, .names, .gallery > *, .cta-band');
+  var targets = document.querySelectorAll('.sec-head, .bento > *, .fr, .fact, .row, .garland, .names, .gallery > *, .cta-band, .note, .more-btn, .rondo-ui, .f-brand, .f-bye, .f-cta, .f-bot > *');
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
@@ -615,6 +615,7 @@
       document.documentElement.classList.add('modal-open');
       dlg.showModal();
       card.scrollTop = 0; requestAnimationFrame(function () { card.scrollTop = 0; });   // фокус на стрелке внизу не должен прокручивать карточку
+      if (document.activeElement && document.activeElement !== document.body) { try { card.setAttribute('tabindex', '-1'); card.focus({ preventScroll: true }); } catch (e) {} }   // ни одна стрелка не «горит» при открытии
       void dlg.offsetWidth;
       dlg.classList.add('open');
       flyFrom(btn.querySelector('.gb-hit'));
@@ -1185,4 +1186,47 @@
   }
   attach(document.querySelector('.hv-card'));
   attach(document.querySelector('.signup .ticket'));
+})();
+
+
+/* Карточка героя: облачко с фразой по ширине самого длинного слова строки (без пустого места справа), свайп влево-вправо переключает героя */
+(function () {
+  var dlg = document.getElementById('hero-view'); if (!dlg) return;
+  var q = dlg.querySelector('.hv-quote'), say = dlg.querySelector('.hv-say'), src = dlg.querySelector('.hv-src');
+  function fitQuote() {
+    if (!q) return;
+    q.style.width = '';
+    if (window.innerWidth > 900 || !q.offsetParent && !dlg.open) return;
+    var cs = getComputedStyle(q), padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+    var maxW = q.getBoundingClientRect().width; if (!maxW) return;
+    var best = 0;
+    [say, src].forEach(function (el) {
+      if (!el) return;
+      var rg = document.createRange(); rg.selectNodeContents(el);
+      var rects = [].slice.call(rg.getClientRects()).filter(function (r) { return r.width > 0 && r.height > 0; });
+      if (!rects.length) return;
+      var left = Math.min.apply(null, rects.map(function (r) { return r.left; })), right = Math.max.apply(null, rects.map(function (r) { return r.right; }));
+      best = Math.max(best, right - left);
+    });
+    if (best > 0 && best + padX + 1 < maxW) q.style.width = Math.ceil(best + padX + 1) + 'px';
+  }
+  if (q) {
+    q.style.maxWidth = '100%';
+    new MutationObserver(function () { setTimeout(fitQuote, 30); setTimeout(fitQuote, 400); }).observe(say, { childList: true });
+    window.addEventListener('resize', fitQuote);
+    new MutationObserver(function () { setTimeout(fitQuote, 60); setTimeout(fitQuote, 800); }).observe(dlg, { attributes: true, attributeFilter: ['open', 'class'] });
+  }
+
+  // свайп: касание-сдвиг по горизонтали больше 50 px и заметно больше, чем по вертикали → предыдущий/следующий герой (той же анимацией, что стрелки)
+  var sx = 0, sy = 0, st = 0, track = false;
+  dlg.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1 || dlg.querySelector('.hv-zoom')) { track = false; return; }
+    track = true; sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now();
+  }, { passive: true });
+  dlg.addEventListener('touchend', function (e) {
+    if (!track) return; track = false;
+    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.6 || Date.now() - st > 700) return;
+    var btn = dlg.querySelector(dx < 0 ? '[data-hv-next]' : '[data-hv-prev]'); if (btn) btn.click();
+  }, { passive: true });
 })();

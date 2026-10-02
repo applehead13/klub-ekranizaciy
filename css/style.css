@@ -1129,8 +1129,7 @@ html.modal-open .dock { opacity: 0; pointer-events: none; }
 .reel { padding: 92px var(--out); background:
     linear-gradient(90deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, .55)),
     linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, .04)),
-    url(../img/grain.png) 0 0 / 160px 160px,
-    #17130e; background-blend-mode: normal, normal, soft-light, normal; }
+    #17130e; background-blend-mode: normal, normal, normal; }   /* зерно на киноленте убрано: по всему сайту уже лежит общее зерно, вместе выходил двойной шум */
 .reel::before, .reel::after { height: 30px; left: 0; right: 0; background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='30' viewBox='0 0 40 30'><rect x='9' y='5' width='22' height='20' rx='4.5' fill='%23696139'/><path d='M9.8 21V9.5a4 4 0 0 1 4-4H27' fill='none' stroke='%23000' stroke-opacity='.55' stroke-width='2'/><path d='M30.2 9v11.5a4 4 0 0 1-4 4H13' fill='none' stroke='%23fff' stroke-opacity='.16' stroke-width='1.5'/></svg>") 0 0 / 40px 30px repeat-x; animation: tape 2.2s linear infinite; }
 .reel::before { top: 14px; }
 .reel::after { bottom: 14px; }
@@ -3346,3 +3345,28 @@ html.modal-open body::after { display: none; }
 @media (max-width: 900px), (hover: none) {
   .signup .ticket.tearing, .signup .ticket.torn { overflow: visible !important; max-height: none; }
 }
+
+
+/* Карточка героя: стрелка «назад» не горит жёлтым при открытии и после касания на сенсорных экранах; жёлтая — только пока палец прижат */
+@media (hover: none) {
+  .hv-nav:focus, .hv-nav:focus-visible, .hv-nav:hover { background: var(--white); color: var(--black); border-color: var(--black); outline: none; box-shadow: none; }
+  .hv-nav:active { background: var(--yellow); }
+}
+.hv-card:focus, .hv-card:focus-visible { outline: none; }
+
+/* Облачко: слова — одним потоком по ширине (Safari: без пустого места справа) */
+.hv-say { text-wrap: balance; }
+
+/* Телефон: «Осталось N мест из 16» → шкала 10 px по видимым буквам, без text-box (Safari считает его по-своему) */
+@media (max-width: 520px) {
+  #now .c-where .small { text-box: none !important; margin-top: -4px; line-height: 1.3; }
+  #now .c-where .meter { margin-top: 4px; }
+}
+
+/* Телефон и планшет: между плавающим меню и последним блоком — 10 на телефоне (до 520 px) и 20 на планшете */
+@media (max-width: 520px) { .page { margin-bottom: 48px; } }
+@media (min-width: 521px) and (max-width: 900px), (hover: none) and (min-width: 521px) { .page { margin-bottom: 68px; } }
+
+/* Карточка героя: горизонтальный свайп отдан переключению героев — браузер не листает историю назад */
+.hero-view, .hero-view * { overscroll-behavior-x: none; }
+@media (max-width: 1180px), (hover: none) { .hero-view { touch-action: pan-y; } .hero-view .hv-card, .hero-view .hv-stage { touch-action: pan-y; } }
