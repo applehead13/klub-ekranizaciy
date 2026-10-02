@@ -1193,22 +1193,43 @@
 (function () {
   var dlg = document.getElementById('hero-view'); if (!dlg) return;
   var q = dlg.querySelector('.hv-quote'), say = dlg.querySelector('.hv-say'), src = dlg.querySelector('.hv-src');
+  var fitBusy = false;
   function fitQuote() {
-    if (!q) return;
-    q.style.width = '';
-    if (window.innerWidth > 900 || !q.offsetParent && !dlg.open) return;
-    var cs = getComputedStyle(q), padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
-    var maxW = q.getBoundingClientRect().width; if (!maxW) return;
-    var best = 0;
+    if (!q || fitBusy) return; fitBusy = true; try { fitQuoteRun(); } finally { fitBusy = false; }
+  }
+  function overflows() {   // слово не должно выходить за поля облачка (длинное слово не переносится, высота при этом не растёт)
+    var qr = q.getBoundingClientRect(), padR = parseFloat(getComputedStyle(q).paddingRight), over = false;
+    [say, src].forEach(function (el) {
+      if (!el) return;
+      var rg = document.createRange(); rg.selectNodeContents(el);
+      [].forEach.call(rg.getClientRects(), function (r) { if (r.width > 0 && r.right > qr.right - padR + 0.5) over = true; });
+    });
+    return over;
+  }
+  function fitQuoteRun() {
+    q.style.removeProperty('width'); q.style.removeProperty('min-width'); q.style.removeProperty('flex');
+    if (!dlg.open) return;
+    var maxW = q.getBoundingClientRect().width; if (!maxW) return;   // доступная ширина по раскладке: шире облачко быть не может (не должно наезжать на героя)
+    q.style.setProperty('min-width', '0', 'important'); q.style.setProperty('flex', '0 0 auto', 'important'); q.style.setProperty('width', Math.ceil(maxW) + 'px', 'important');
+    var h0 = q.getBoundingClientRect().height; if (!h0) return;
+    // наименьшая ширина, при которой облачко остаётся той же высоты (текст не получает лишних строк), — без пустого места справа
+    var lo = 80, hi = Math.ceil(maxW), mid, guard = 0;
+    while (hi - lo > 1 && guard++ < 14) {
+      mid = Math.floor((lo + hi) / 2); q.style.setProperty('width', mid + 'px', 'important');
+      if (q.getBoundingClientRect().height <= h0 + 0.5 && !overflows()) hi = mid; else lo = mid;
+    }
+    q.style.setProperty('width', hi + 'px', 'important');
+    // страховка: самая длинная строка + поля справа ровно как слева
+    var cs = getComputedStyle(q), padL = parseFloat(cs.paddingLeft), best = 0;
     [say, src].forEach(function (el) {
       if (!el) return;
       var rg = document.createRange(); rg.selectNodeContents(el);
       var rects = [].slice.call(rg.getClientRects()).filter(function (r) { return r.width > 0 && r.height > 0; });
       if (!rects.length) return;
-      var left = Math.min.apply(null, rects.map(function (r) { return r.left; })), right = Math.max.apply(null, rects.map(function (r) { return r.right; }));
-      best = Math.max(best, right - left);
+      best = Math.max(best, Math.max.apply(null, rects.map(function (r) { return r.right; })) - Math.min.apply(null, rects.map(function (r) { return r.left; })));
     });
-    if (best > 0 && best + padX + 1 < maxW) q.style.width = Math.ceil(best + padX + 1) + 'px';
+    var w = Math.ceil(best + padL * 2 + 0.5);
+    if (best > 0 && w < hi && w >= 80) { q.style.setProperty('width', w + 'px', 'important'); if (q.getBoundingClientRect().height > h0 + 0.5 || overflows()) q.style.setProperty('width', hi + 'px', 'important'); }
   }
   if (q) {
     q.style.maxWidth = '100%';

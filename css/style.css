@@ -3370,3 +3370,5 @@ html.modal-open body::after { display: none; }
 /* Карточка героя: горизонтальный свайп отдан переключению героев — браузер не листает историю назад */
 .hero-view, .hero-view * { overscroll-behavior-x: none; }
 @media (max-width: 1180px), (hover: none) { .hero-view { touch-action: pan-y; } .hero-view .hv-card, .hero-view .hv-stage { touch-action: pan-y; } }
+
+.hv-quote { box-sizing: border-box; }
