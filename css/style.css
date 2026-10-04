@@ -3378,7 +3378,7 @@ html.modal-open body::after { display: none; }
 .gridov.on { display: block; }
 .gridov i { position: absolute; inset: 0 calc(var(--out) * 2); max-width: calc(2400px - var(--out) * 4); margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s); }
 .gridov b { background: rgba(255, 60, 60, .14); border-inline: 1px solid rgba(255, 60, 60, .35); }
-@media (max-width: 900px) { .gridov i { grid-template-columns: repeat(6, minmax(0, 1fr)); } .gridov b:nth-child(n+7) { display: none; } }
+@media (max-width: 520px) { .gridov i { grid-template-columns: repeat(6, minmax(0, 1fr)); } .gridov b:nth-child(n+7) { display: none; } }
 
 /* ---------- Выравнивание плашек по сетке (12 колонок, от 1400 px): меняется только ширина плашек, отступы и текст внутри прежние.
    Откат: вернуть файл к коммиту 850db42 */
