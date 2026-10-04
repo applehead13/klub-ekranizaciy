@@ -3372,3 +3372,10 @@ html.modal-open body::after { display: none; }
 @media (max-width: 1180px), (hover: none) { .hero-view { touch-action: pan-y; } .hero-view .hv-card, .hero-view .hv-stage { touch-action: pan-y; } }
 
 .hv-quote { box-sizing: border-box; }
+
+/* Сетка для проверки вёрстки: включается ссылкой ?grid или клавишей G */
+.gridov { display: none; position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
+.gridov.on { display: block; }
+.gridov i { position: absolute; inset: 0 var(--out); max-width: calc(2400px - var(--out) * 2); margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s); }
+.gridov b { background: rgba(255, 60, 60, .14); border-inline: 1px solid rgba(255, 60, 60, .35); }
+@media (max-width: 900px) { .gridov i { grid-template-columns: repeat(4, minmax(0, 1fr)); } .gridov b:nth-child(n+5) { display: none; } }
