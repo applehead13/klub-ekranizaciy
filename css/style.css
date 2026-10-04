@@ -3397,3 +3397,10 @@ html.modal-open body::after { display: none; }
   .reel .frames { margin-inline: var(--out); }
   .reel .frames::before, .reel .frames::after { left: calc(var(--out) * -1); }
 }
+/* афиша: три таба с датами начинаются на начале колонки сетки (7-я колонка, от 1800 px 8-я); на экранах уже не хватает места под название и три таба, там как было */
+@media (min-width: 1520px) {
+  .row { grid-template-columns: clamp(250px, 22vw, 320px) calc(6 * (100% / 12 + 5px) - clamp(250px, 22vw, 320px) - 60px) minmax(0, 1fr) 232px !important; }
+}
+@media (min-width: 1800px) {
+  .row { grid-template-columns: clamp(250px, 22vw, 320px) calc(7 * (100% / 12 + 5px) - clamp(250px, 22vw, 320px) - 60px) minmax(0, 1fr) 232px !important; }
+}
