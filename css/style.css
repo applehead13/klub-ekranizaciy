@@ -3376,6 +3376,19 @@ html.modal-open body::after { display: none; }
 /* Сетка для проверки вёрстки: включается ссылкой ?grid или клавишей G */
 .gridov { display: none; position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
 .gridov.on { display: block; }
-.gridov i { position: absolute; inset: 0 var(--out); max-width: calc(2400px - var(--out) * 2); margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s); }
+.gridov i { position: absolute; inset: 0 calc(var(--out) * 2); max-width: calc(2400px - var(--out) * 4); margin-inline: auto; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s); }
 .gridov b { background: rgba(255, 60, 60, .14); border-inline: 1px solid rgba(255, 60, 60, .35); }
 @media (max-width: 900px) { .gridov i { grid-template-columns: repeat(4, minmax(0, 1fr)); } .gridov b:nth-child(n+5) { display: none; } }
+
+/* ---------- Выравнивание плашек по сетке (12 колонок, от 1400 px): меняется только ширина плашек, отступы и текст внутри прежние.
+   Откат: вернуть файл к коммиту 850db42 */
+@media (min-width: 1400px) {
+  #now .bento { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  #now .bento > .c-book { grid-column: span 4; }
+  #now .bento > .c-sess { grid-column: span 2; }
+  #now .bento > .c-where { grid-column: span 2; }
+  .gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .gallery > .slot.big { grid-column: span 8; }
+  .gallery > .slot:not(.big) { grid-column: span 2; }
+  .sec-head.side > p { width: calc(50% - 10px) !important; }   /* текст справа: ровно шесть колонок */
+}
