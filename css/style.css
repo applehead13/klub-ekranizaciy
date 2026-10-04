@@ -3392,8 +3392,8 @@ html.modal-open body::after { display: none; }
   .gallery > .slot:not(.big) { grid-column: span 2; }
   .sec-head.side > p { width: calc(41.6667% - 11.6667px) !important; }   /* текст справа: с 8-й колонки, пять колонок */
   /* «Три вечера»: три кадра по 4 колонки, промежутки между ними ровно на промежутках сетки; плёнка по-прежнему от края до края */
-  /* первый экран: текст под заголовком начинается с 9-й колонки (четыре колонки), по левому краю */
-  .hero-mid .lead { width: calc(33.3333% - 13.3333px); max-width: none; text-align: left; margin-left: auto; }
+  /* первый экран: текст под заголовком начинается с 10-й колонки (три колонки), по левому краю */
+  .hero-mid .lead { width: calc(25% - 15px); max-width: none; text-align: left; margin-left: auto; }
   .reel .frames { margin-inline: var(--out); }
   .reel .frames::before, .reel .frames::after { left: calc(var(--out) * -1); }
 }
