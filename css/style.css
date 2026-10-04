@@ -3404,3 +3404,12 @@ html.modal-open body::after { display: none; }
 @media (min-width: 1800px) {
   .row { grid-template-columns: clamp(250px, 22vw, 320px) calc(7 * (100% / 12 + 5px) - clamp(250px, 22vw, 320px) - 60px) minmax(0, 1fr) 232px !important; }
 }
+
+/* Телефон и планшет: всё появляется «из дымки» (проявление с размытием), ничего не выезжает снизу: ни заголовки блоков, ни слова главного заголовка.
+   Прежний вариант без размытия и с подъёмом на 14 px: коммит 23aa8a1 */
+@media (max-width: 900px), (hover: none) {
+  @keyframes fog { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: none; } }
+  @keyframes h1-in { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: none; } }
+  .tw > span { transform: none; transition: none; }
+  #h1 .hw { transform: none; }
+}
